@@ -1,0 +1,12 @@
+>>> print("Data Diri")
+Data Diri
+>>> print("Nama:Doni")
+Nama:Doni
+>>> print("pekerjaan:mahasiswa")
+pekerjaan:mahasiswa
+>>> print("jenis kelamin:Laki-laki")
+jenis kelamin:Laki-laki
+>>> print("alamat: desa")
+alamat: desa
+>>> print("Terima kasih...")
+Terima kasih...
