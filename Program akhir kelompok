@@ -1,0 +1,63 @@
+import tkinter as tk
+from tkinter import messagebox
+
+# Data indeks harga dolar per bulan
+print("")
+months = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec''Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', ]
+print("")
+dollar_index = [15075, 15167, 15313, 15564, 15976, 15561, 15516, 15882, 15793, 15952, 16357, 16260,]
+
+# Fungsi untuk mengkonversi dolar ke rupiah
+def convert():
+    try:
+        dollar_amount = float(dollar_entry.get())
+        rupiah_amount = dollar_amount * exchange_rate
+        result_label.config(text="{:.2f} Rupiah".format(rupiah_amount))
+    except ValueError:
+        messagebox.showerror("Error", "Masukkan angka yang valid")
+
+# Fungsi untuk menampilkan grafik
+def draw_graph():
+    # Membersihkan area grafik sebelum menggambar ulang
+    canvas.delete("all")
+    
+    # Menggambar sumbu x
+    for i, month in enumerate(months):
+        canvas.create_text((i + 1) * 50, 200, text=month)
+    
+    # Menggambar sumbu y dan bar grafik
+    max_index = max(dollar_index)
+    for i, index in enumerate(dollar_index):
+        bar_height = (index / max_index) * 150
+        canvas.create_rectangle((i + 0.5) * 50, 200 - bar_height, (i + 1.5) * 50, 200, fill="blue")
+        canvas.create_text((i + 1) * 50, 210, text=str(index))
+
+# Tarif pertukaran dolar ke rupiah (contoh)
+exchange_rate = 16000
+
+# Membuat GUI
+root = tk.Tk()
+root.title("Konverter Dollar ke Rupiah")
+
+# Label dan entry untuk konversi dolar ke rupiah
+tk.Label(root, text="Masukkan Jumlah Dollar:").pack()
+dollar_entry = tk.Entry(root)
+dollar_entry.pack()
+
+# Tombol konversi
+convert_button = tk.Button(root, text="Konversi", command=convert)
+convert_button.pack()
+
+# Hasil konversi
+result_label = tk.Label(root, text="")
+result_label.pack()
+
+# Canvas untuk menampilkan grafik
+canvas = tk.Canvas(root, width=650, height=250)
+canvas.pack()
+
+# Tombol untuk menampilkan grafik
+graph_button = tk.Button(root, text="Tampilkan Grafik Indeks Harga Dollar", command=draw_graph)
+graph_button.pack()
+
+root.mainloop()
